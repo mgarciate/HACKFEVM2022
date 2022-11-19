@@ -13,7 +13,11 @@ module.exports = {
     wallaby: {
       url: "https://wallaby.node.glif.io/rpc/v0",
       accounts: [PRIVATE_KEY],
-    }
+    },
+    granache: {
+      url: "http://127.0.0.1:8545",
+      accounts: ["7345e2d4b9121fe5152a07996ef141cbe39a885ee3c7f16da418ff83ee1aa895"],
+    },
   },
   paths: {
     sources: "./contracts",
