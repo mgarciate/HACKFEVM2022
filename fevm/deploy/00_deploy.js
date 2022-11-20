@@ -40,13 +40,12 @@ module.exports = async ({ deployments }) => {
 
   const priorityFee = await callRpc("eth_maxPriorityFeePerGas");
   const f4Address = fa.newDelegatedEthAddress(deployer.address).toString();
-  const nonce = await callRpc("Filecoin.MpoolGetNonce", [f4Address]);
+  //const nonce = await callRpc("Filecoin.MpoolGetNonce", [f4Address]);
 
   console.log("Wallet Ethereum Address:", deployer.address);
   console.log("Wallet f4Address: ", f4Address)
 
-
-  await deploy("SimpleCoin", {
+  await deploy("Oracle", {
     from: deployer.address,
     args: [],
     // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
@@ -54,31 +53,43 @@ module.exports = async ({ deployments }) => {
     // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
     // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
     maxPriorityFeePerGas: priorityFee,
+    amount: ethers.utils.parseEther("1"),
     log: true,
   });
 
-  await deploy("MinerAPI", {
-    from: deployer.address,
-    args: [0x0000001],
-    // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
-    // a large gasLimit. This should be addressed in the following releases.
-    // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
-    // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
-    maxPriorityFeePerGas: priorityFee,
-    log: true,
-  });
+  // await deploy("SimpleCoin", {
+  //   from: deployer.address,
+  //   args: [],
+  //   // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
+  //   // a large gasLimit. This should be addressed in the following releases.
+  //   // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
+  //   // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
+  //   maxPriorityFeePerGas: priorityFee,
+  //   log: true,
+  // });
 
-  await deploy("MarketAPI", {
-    from: deployer.address,
-    args: [],
-    // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
-    // a large gasLimit. This should be addressed in the following releases.
-    // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
-    // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
-    maxPriorityFeePerGas: priorityFee,
-    log: true,
-  });
+  // await deploy("MinerAPI", {
+  //   from: deployer.address,
+  //   args: [0x0000001],
+  //   // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
+  //   // a large gasLimit. This should be addressed in the following releases.
+  //   // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
+  //   // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
+  //   maxPriorityFeePerGas: priorityFee,
+  //   log: true,
+  // });
+
+  // await deploy("MarketAPI", {
+  //   from: deployer.address,
+  //   args: [],
+  //   // since it's difficult to estimate the gas before f4 address is launched, it's safer to manually set
+  //   // a large gasLimit. This should be addressed in the following releases.
+  //   // since Ethereum's legacy transaction format is not supported on FVM, we need to specify
+  //   // maxPriorityFeePerGas to instruct hardhat to use EIP-1559 tx format
+  //   maxPriorityFeePerGas: priorityFee,
+  //   log: true,
+  // });
 };
 
 
-module.exports.tags = ["SimpleCoin", "MinerAPI", "MarketAPI"];
+module.exports.tags = ["Oracle", "SimpleCoin", "MinerAPI", "MarketAPI"];
