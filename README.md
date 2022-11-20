@@ -1,5 +1,5 @@
 # HACKFEVM2022
-A starter hardhat project for developing, deploying, and testing Solidity actors on the FEVM
+This project shows that is possible to have an Oracle running on the FEVM
 
 ## Links
 https://github.com/filecoin-project/FEVM-Hardhat-Kit
