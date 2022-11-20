@@ -3,6 +3,7 @@ This project shows that is possible to have an Oracle running on the FEVM
 
 ## README
 [FEVM](fevm/README.md)
+[off-chain-oracle](off-chain-oracle/README.md)
 
 ## Links
 https://github.com/filecoin-project/FEVM-Hardhat-Kit
